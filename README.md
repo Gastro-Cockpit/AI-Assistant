@@ -10,6 +10,8 @@ publishes the week and decides requests. The MCP server itself is not part of th
 The quickest way: paste this line into your AI assistant. An assistant that can change its own setup adds the server
 itself; any other shows you where to add it in its settings.
 
+<!-- Same line as connect_assistant.setup_line in frontend/locales/de.json of the app repository; change both. -->
+
 ```text
 Richte mir den MCP-Server von Gastro Cockpit ein: Er heißt gastro-cockpit, läuft unter https://mcp.gastro-cockpit.de/mcp über Streamable HTTP und meldet mich per OAuth an. Kannst du ihn nicht selbst eintragen, führe mich Schritt für Schritt durch deine Einstellungen.
 ```
