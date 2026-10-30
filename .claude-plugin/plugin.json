@@ -1,0 +1,12 @@
+{
+	"name": "gastro-cockpit",
+	"displayName": "Gastro Cockpit",
+	"version": "1.0.0",
+	"description": "Run your restaurant's staff from the chat: the daily briefing, the weekly schedule, sick reports and the month-end check in Gastro Cockpit, the shift planning and time tracking app for restaurants in Germany.",
+	"author": { "name": "Gastro Cockpit GmbH", "url": "https://gastro-cockpit.de" },
+	"homepage": "https://gastro-cockpit.de",
+	"repository": "https://github.com/Gastro-Cockpit/AI-Assistant",
+	"privacyPolicyUrl": "https://gastro-cockpit.de/datenschutz-app/",
+	"license": "EUPL-1.2",
+	"keywords": ["restaurant", "shift planning", "staff scheduling", "time tracking", "gastronomy"]
+}

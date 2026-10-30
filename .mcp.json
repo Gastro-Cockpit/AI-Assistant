@@ -1,0 +1,8 @@
+{
+	"mcpServers": {
+		"gastro-cockpit": {
+			"type": "http",
+			"url": "https://mcp.gastro-cockpit.de/mcp"
+		}
+	}
+}
