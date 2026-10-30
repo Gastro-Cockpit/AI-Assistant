@@ -15,6 +15,8 @@ there) and runs at `https://mcp.gastro-cockpit.de/mcp`. Nothing here is server c
 | `listings/`                         | What we enter in the Claude and ChatGPT portals, English with a German version                                                                       |
 | `server.json`                       | The entry `de.gastro-cockpit/mcp` in the official MCP Registry                                                                                       |
 | `.github/workflows/publish-mcp.yml` | Publishes `server.json` to the registry when a `v*` tag is pushed                                                                                    |
+| `justfile`, `.oxfmtrc.json`         | `just format` and `just lint`; the oxfmt config keeps a format config outside the repository from applying                                           |
+| `.github/workflows/lint.yml`        | Runs `just lint` on every push to `main` and every pull request                                                                                      |
 | `README.md`, `LICENSE`              | Both directories require them; the README is the listing text of the Claude plugin                                                                   |
 
 ## Rules
@@ -53,8 +55,8 @@ there) and runs at `https://mcp.gastro-cockpit.de/mcp`. Nothing here is server c
 
 ## Checks
 
-- `claude plugin validate .` must print `✔ Validation passed`.
-- `oxfmt --check .` for Markdown and JSON.
+- `just lint` must pass: `oxfmt --check .` for Markdown, JSON and YAML, then `claude plugin validate .`, which must
+  print `✔ Validation passed`. `just format` fixes the format. Both pin oxfmt; CI also pins Claude Code.
 - The OpenAI upload is a ZIP of `.claude-plugin/`, `.mcp.json`, `skills/`, `README.md` and `LICENSE` only; leave
   `listings/` and `.claude/` out. This file sits in `.claude/` because a `CLAUDE.md` at the plugin root makes the
   validator warn.
