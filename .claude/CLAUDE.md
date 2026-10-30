@@ -6,14 +6,16 @@ there) and runs at `https://mcp.gastro-cockpit.de/mcp`. Nothing here is server c
 
 ## Layout
 
-| Path                         | What                                                                                         |
-| ---------------------------- | -------------------------------------------------------------------------------------------- |
-| `.claude-plugin/plugin.json` | Plugin manifest; Claude reads it, and OpenAI converts it on upload                           |
-| `.claude-plugin/icon.png`    | The app icon, 1024 px square; the directory takes it only the first time the plugin is saved |
-| `.mcp.json`                  | The one remote MCP server the plugin connects                                                |
-| `skills/<name>/SKILL.md`     | One folder per skill; the folder name equals the skill's `name`                              |
-| `listings/`                  | What we enter in the Claude and ChatGPT portals, English with a German version               |
-| `README.md`, `LICENSE`       | Both directories require them; the README is the listing text of the Claude plugin           |
+| Path                                | What                                                                                                                                                 |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.claude-plugin/plugin.json`        | Plugin manifest; Claude reads it, and OpenAI converts it on upload                                                                                   |
+| `.claude-plugin/icon.png`           | The app icon, 1024 px square; the directory takes it only the first time the plugin is saved; `server.json` links it by its raw GitHub URL on `main` |
+| `.mcp.json`                         | The one remote MCP server the plugin connects                                                                                                        |
+| `skills/<name>/SKILL.md`            | One folder per skill; the folder name equals the skill's `name`                                                                                      |
+| `listings/`                         | What we enter in the Claude and ChatGPT portals, English with a German version                                                                       |
+| `server.json`                       | The entry `de.gastro-cockpit/mcp` in the official MCP Registry                                                                                       |
+| `.github/workflows/publish-mcp.yml` | Publishes `server.json` to the registry when a `v*` tag is pushed                                                                                    |
+| `README.md`, `LICENSE`              | Both directories require them; the README is the listing text of the Claude plugin                                                                   |
 
 ## Rules
 
@@ -21,6 +23,16 @@ there) and runs at `https://mcp.gastro-cockpit.de/mcp`. Nothing here is server c
   into the portals' secure forms only.
 - **`name` in `plugin.json` is permanent** (`gastro-cockpit`): people install the plugin by it. Raise `version` on
   every release.
+- **One version, one tag.** `server.json` carries the same `version` as `plugin.json`. Pushing the tag
+  `v<version>` publishes it to the MCP Registry; the workflow refuses a tag that differs from either file, and the
+  registry never takes a version twice.
+- **Registry key.** The registry trusts the Ed25519 key in the `v=MCPv1` TXT record on the apex of
+  `gastro-cockpit.de` (`configs/gastro-cockpit-de.zone` in the Documentation repository). Its private half is
+  `MCP_PRIVATE_KEY` in the `mcp-registry` environment, which admits `v*` tags only; it can publish every server
+  under `de.gastro-cockpit`. To rotate it, replace the TXT record (the registry tries a stale record first and
+  fails) and the secret. Take the 64 hex characters with
+  `openssl pkey -in key.pem -outform DER | tail -c 32 | xxd -p -c 64`: the `grep -A3 priv:` line of the registry
+  docs also catches `pub` when OpenSSL prints 16 bytes per line.
 - **Skills only.** No commands, agents, hooks or `bin/`: OpenAI drops commands and agents, refuses hooks, and a
   top-level `bin/` stops claude.ai from installing the plugin.
 - **Provider-neutral skills.** Never name Claude or ChatGPT in a skill; write "the person" for the user. The text
