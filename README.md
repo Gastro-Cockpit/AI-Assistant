@@ -21,12 +21,13 @@ your Gastro Cockpit account, with a code sent to your email or with your passwor
 assistant may reach. Every owner of a location can connect; a manager can connect when the owner allows it in the
 app.
 
-Then ask in your own words. Four skills cover the everyday jobs:
+Then ask in your own words. Five skills cover the everyday jobs:
 
 - **tagesbriefing**: "Was ist heute los?" Who works, open shifts, absences, waiting requests, labor cost.
 - **woche-planen**: "Plan mir die nächste Woche." Fills the week and asks once before it enters anything.
 - **krankmeldung-bearbeiten**: "Anna hat sich krank gemeldet." Shows the affected shifts and proposes a replacement.
 - **monatsabschluss**: "Was fehlt noch für die Lohnabrechnung?" Lists what is open before the payroll.
+- **einrichten**: "Was fehlt noch bis zum ersten Dienstplan?" Takes a new business through its setup, one step at a time.
 
 ## Data
 
