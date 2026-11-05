@@ -11,15 +11,15 @@ website and for reference.
 
 ## Listing
 
-| Field              | Value                                                      |
-| ------------------ | ---------------------------------------------------------- |
-| Name (≤ 100)       | Gastro Cockpit                                             |
-| Slug (permanent)   | `gastro-cockpit`                                           |
-| Categories (1–5)   | the closest of the portal's list: productivity, operations |
-| Documentation URL  | the help page of GC-302 on gastro-cockpit.de               |
-| Privacy policy URL | <https://gastro-cockpit.de/datenschutz-app/> (section 13)  |
-| Support contact    | support@gastro-cockpit.de                                  |
-| Icon               | `Logo-CI/Logo_primary/Logo_svg/logo_icon_only.svg`         |
+| Field              | Value                                                                                |
+| ------------------ | ------------------------------------------------------------------------------------ |
+| Name (≤ 100)       | Gastro Cockpit                                                                       |
+| Slug (permanent)   | `gastro-cockpit`                                                                     |
+| Categories (1–5)   | the closest of the portal's list: productivity, operations                           |
+| Documentation URL  | <https://gastro-cockpit.de/hilfe/standort-und-einstellungen/ki-assistent-verbinden/> |
+| Privacy policy URL | <https://gastro-cockpit.de/datenschutz-app/> (section 13)                            |
+| Support contact    | support@gastro-cockpit.de                                                            |
+| Icon               | `Logo-CI/Logo_primary/Logo_svg/logo_icon_only.svg`                                   |
 
 **One-liner (≤ 200):**
 
@@ -48,10 +48,22 @@ website and for reference.
 
 ## Use cases
 
-- Primary use cases: daily briefing of a location; planning and publishing the weekly schedule; covering a sick
-  day; deciding requests; checking hours, minijob limits and labor cost before payroll.
-- What users need first: a Gastro Cockpit account as the owner of a location, or as a manager the owner allowed.
-- Reads and writes data.
+The portal takes up to three and shows them to the reviewers only, not in the listing. The prompts are the first
+three review cases of the ChatGPT listing (`plugin.json`), so both reviews test the same data.
+
+| #   | Use case                             | Example prompt                          |
+| --- | ------------------------------------ | --------------------------------------- |
+| 1   | Daily briefing of a location         | What's going on at my restaurant today? |
+| 2   | Plan and publish the weekly schedule | Plan next week's open shifts.           |
+| 3   | Cover a shift with a replacement     | Who can cover tomorrow's evening shift? |
+
+**Prerequisites:**
+
+> A Gastro Cockpit account that owns a location, or a manager account whose owner turned on "KI-Assistent nutzen"
+> in the app. Sign in with a code sent by email or with the account password, then choose the locations Claude may
+> reach.
+
+**Read/write:** reads and writes. The read tools carry `readOnlyHint`, the write tools `destructiveHint`.
 
 ## Company
 
@@ -77,10 +89,11 @@ The credentials go into the portal only, never into this repository.
 
 1. Add `https://mcp.gastro-cockpit.de/mcp` as a custom connector.
 2. On the Gastro Cockpit sign-in page choose "Mit Passwort anmelden" and sign in with the review account.
-3. Tick the location "Gastro Cockpit Verification" and allow. It holds realistic demo data and no real staff.
-4. Try: "What's going on today?", "Who can cover tomorrow's late shift?", "Plan next week" (Claude shows a
-   proposal and asks before it writes), "Which requests are waiting?", "How does labor cost compare to the
-   target?".
+3. Tick the location "Gastro Cockpit Verification" and allow. It holds realistic demo data and no real staff; the
+   review account is a manager there whom the owner allowed to use the assistant.
+4. Try: "What's going on at my restaurant today?", "Who can cover tomorrow's evening shift?", "Plan next week's
+   open shifts." (Claude shows a proposal and asks before it writes), "Which requests are waiting for me?", "How
+   does labor cost compare to the target this month?".
 
 We confirm in the portal that every tool was run through Claude as a custom connector.
 
