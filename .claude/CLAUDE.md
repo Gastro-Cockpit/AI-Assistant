@@ -28,7 +28,9 @@ there) and runs at `https://mcp.gastro-cockpit.de/mcp`. Nothing here is server c
   `version` on every release.
 - **Two manifests, one plugin.** The root `plugin.json` repeats the root fields of `.claude-plugin/plugin.json`
   (`name`, `version`, `description`, `author`, …), and `mcp.json` repeats the server of `.mcp.json`: change both.
-  OpenAI reads only the root pair, Claude only the other.
+  OpenAI reads only the root pair, Claude only the other. The listing links differ by place: Claude's directory reads
+  `documentationUrl`, `supportUrl`, `privacyPolicyUrl` and `termsOfServiceUrl` from `.claude-plugin/plugin.json`,
+  OpenAI the URLs in `extensions.com.openai.interface`.
 - **One version, one tag.** `server.json` and both plugin manifests carry the same `version`; `just lint` checks it.
   Pushing the tag `v<version>` publishes it to the MCP Registry; the workflow refuses a tag that differs from any of
   the three, and the registry never takes a version twice.
