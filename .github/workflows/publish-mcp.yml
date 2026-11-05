@@ -24,10 +24,11 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Check the tag against both versions
+      - name: Check the tag against every version
         run: |
           test "${GITHUB_REF_NAME#v}" = "$(jq -r .version server.json)"
           test "${GITHUB_REF_NAME#v}" = "$(jq -r .version .claude-plugin/plugin.json)"
+          test "${GITHUB_REF_NAME#v}" = "$(jq -r .version plugin.json)"
 
       - name: Install mcp-publisher
         run: |

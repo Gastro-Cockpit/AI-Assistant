@@ -1,0 +1,107 @@
+{
+	"$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+	"name": "gastro-cockpit",
+	"version": "1.0.0",
+	"description": "Run your restaurant's staff from the chat: the daily briefing, the weekly schedule, sick reports and the month-end check in Gastro Cockpit, the shift planning and time tracking app for restaurants in Germany.",
+	"author": { "name": "Gastro Cockpit GmbH", "email": "support@gastro-cockpit.de", "url": "https://gastro-cockpit.de" },
+	"homepage": "https://gastro-cockpit.de",
+	"repository": "https://github.com/Gastro-Cockpit/AI-Assistant",
+	"license": "EUPL-1.2",
+	"keywords": ["restaurant", "shift planning", "staff scheduling", "time tracking", "gastronomy"],
+	"extensions": {
+		"com.openai": {
+			"interface": {
+				"displayName": "Gastro Cockpit",
+				"shortDescription": "Restaurant staff scheduling",
+				"longDescription": "Gastro Cockpit is the shift planning and time tracking app for restaurants and cafés in Germany. This plugin lets ChatGPT work with the locations you run: it reads the schedule, the team, worked hours, open requests and labor cost, and on your yes in the chat it changes them.\n\nAsk in your own words, for example \"What's going on today?\", \"Plan next week\", \"Anna called in sick, who can cover?\" or \"What is still open before payroll?\". ChatGPT plans the open shifts of a week with the same planner as the app, proposes replacements, decides vacation and time-off requests, corrects tracked time and publishes the schedule. Every change is shown to you first and made only after you confirm it; your staff see it in the app as if you had made it there.\n\nWho can connect: every owner of a location, and a manager when the owner allows it in the app. You need a Gastro Cockpit account; you sign in with a code sent to your email or with your password and choose the locations ChatGPT may reach.\n\nPrivacy by design: ChatGPT never receives wages per person, tax, bank or social security data, addresses, phone numbers, birth dates or the content of sick notes. Sick days reach ChatGPT per person only when an owner releases health data for the connection. Every call is logged, and owners can end any connection in the app.\n\nLimitations: Gastro Cockpit and this plugin are made for restaurants in Germany and follow German labor law. Employees cannot connect; only owners and the managers they allow. The plugin prepares payroll but does not run it, and it never moves money.",
+				"developerName": "Gastro Cockpit GmbH",
+				"category": "Productivity",
+				"capabilities": [
+					"Read the schedule, the team and worked hours",
+					"Plan and publish the weekly schedule",
+					"Cover sick days with replacements",
+					"Decide vacation and time-off requests",
+					"Check labor cost and minijob limits"
+				],
+				"websiteURL": "https://gastro-cockpit.de",
+				"supportURL": "https://gastro-cockpit.de/hilfe/",
+				"privacyPolicyURL": "https://gastro-cockpit.de/datenschutz-app/",
+				"termsOfServiceURL": "https://gastro-cockpit.de/nutzungsbedingungen/",
+				"defaultPrompt": [
+					"What's going on at my restaurant today?",
+					"Plan next week's open shifts.",
+					"What is still open before payroll?"
+				],
+				"brandColor": "#FFA000",
+				"composerIcon": "./.claude-plugin/icon.png",
+				"logo": "./.claude-plugin/icon.png"
+			},
+			"onboardingSkill": "./skills/einrichten/SKILL.md",
+			"review": {
+				"test_cases": {
+					"positive": [
+						{
+							"description": "Daily briefing of a location",
+							"prompt": "What's going on at my restaurant today?",
+							"tools_triggered": "get_briefing",
+							"expected_behavior": "Says who works today, which shifts are still open, who is absent (without the reason), which requests are waiting and the labor cost. Nothing is changed."
+						},
+						{
+							"description": "Find a replacement for a shift",
+							"prompt": "Who can cover tomorrow's evening shift?",
+							"tools_triggered": "get_day_overview, suggest_staff",
+							"expected_behavior": "Lists suitable staff for the shift with a short reason for each. Nobody is assigned until the user says yes."
+						},
+						{
+							"description": "Plan the open shifts of a week",
+							"prompt": "Plan next week's open shifts.",
+							"tools_triggered": "plan_week",
+							"expected_behavior": "Proposes who works which open shift and names what stays open, then asks once. Only after a yes are the shifts assigned."
+						},
+						{
+							"description": "List the waiting requests",
+							"prompt": "Which requests are waiting for me?",
+							"tools_triggered": "get_inbox",
+							"expected_behavior": "Lists the open vacation, time-off and time-correction requests with who asked and for when. Nothing is decided."
+						},
+						{
+							"description": "Labor cost against the target",
+							"prompt": "How does labor cost compare to the target this month?",
+							"tools_triggered": "get_cost_forecast",
+							"expected_behavior": "Gives the labor cost of the month so far and the forecast against the target, as totals. No wage of any single person is shown."
+						}
+					],
+					"negative": [
+						{
+							"description": "Personal pay and bank data: the plugin never returns the wage or the bank details of a person.",
+							"prompt": "Show me Anna's salary and her bank details.",
+							"expected_behavior": "Says that it has no access to a person's pay or bank details and shows none."
+						},
+						{
+							"description": "Moving money: the plugin has no tool that pays anyone.",
+							"prompt": "Pay out this month's wages to the team.",
+							"expected_behavior": "Says that it cannot pay anyone and offers to check what is still open before payroll."
+						},
+						{
+							"description": "A location outside the connection: only the locations chosen at sign-in are reachable.",
+							"prompt": "Show me the schedule of a restaurant I don't run.",
+							"expected_behavior": "Says that it reaches only the locations chosen when connecting and shows no data of any other location."
+						}
+					]
+				},
+				"commerce": false,
+				"commerce_description": "The plugin sells nothing and moves no money."
+			},
+			"publication": {
+				"countries": ["DE", "AT", "CH"],
+				"release_notes": "First release: the Gastro Cockpit connector with five skills for the daily briefing, planning the week, sick reports, the month-end check and the setup of a new business.",
+				"translations": {
+					"de-DE": {
+						"subtitle": "Dienstplan für die Gastronomie",
+						"description": "Gastro Cockpit ist die App für Dienstplan und Zeiterfassung in Restaurants und Cafés in Deutschland. Mit diesem Plugin arbeitet ChatGPT mit den Standorten, die du führst: ChatGPT liest den Dienstplan, das Team, die gearbeiteten Stunden, offene Anfragen und die Personalkosten und ändert sie nach deinem Ja im Chat.\n\nFrag in deinen eigenen Worten, zum Beispiel „Was ist heute los?“, „Plan mir die nächste Woche“, „Anna hat sich krank gemeldet, wer kann einspringen?“ oder „Was fehlt noch für die Lohnabrechnung?“. ChatGPT plant die offenen Schichten einer Woche mit derselben Planung wie die App, schlägt Ersatz vor, entscheidet Urlaubs- und Freistellungsanträge, korrigiert erfasste Zeiten und veröffentlicht den Dienstplan. Jede Änderung siehst du vorher, eingetragen wird sie erst nach deinem Ja; dein Team sieht sie in der App, als hättest du sie dort gemacht.\n\nVerbinden kann jeder Inhaber eines Standorts und ein Manager, wenn der Inhaber es ihm in der App erlaubt. Du brauchst ein Gastro-Cockpit-Konto; du meldest dich mit einem Code per E-Mail oder mit deinem Passwort an und wählst die Standorte aus, die ChatGPT sehen darf.\n\nDatenschutz von Anfang an: ChatGPT bekommt nie Löhne einzelner Personen, Steuer-, Bank- oder Sozialversicherungsdaten, Anschriften, Telefonnummern, Geburtsdaten oder Inhalte von Krankmeldungen. Krankheitstage pro Person sieht ChatGPT nur, wenn ein Inhaber Gesundheitsdaten für die Verbindung freigibt. Jeder Abruf wird protokolliert, und Inhaber können jede Verbindung in der App beenden.\n\nGrenzen: Gastro Cockpit und dieses Plugin sind für Restaurants in Deutschland gemacht und folgen dem deutschen Arbeitsrecht. Mitarbeiter können sich nicht verbinden, nur Inhaber und die Manager, denen sie es erlauben. Das Plugin bereitet die Lohnabrechnung vor, führt sie aber nicht durch, und es bewegt nie Geld."
+					}
+				}
+			}
+		}
+	}
+}
