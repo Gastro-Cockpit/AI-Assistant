@@ -93,7 +93,7 @@ The credentials go into the portal only, never into this repository.
    review account is a manager there whom the owner allowed to use the assistant.
 4. Try: "What's going on at my restaurant today?", "Who can work tomorrow from 5 pm to 11 pm?", "Plan next week's
    open shifts." (Claude shows a proposal and asks before it writes), "Which requests are waiting for me?", "How
-   does labor cost compare to the target this month?".
+   does labor cost compare to the target this week?".
 
 We confirm in the portal that every tool was run through Claude as a custom connector.
 

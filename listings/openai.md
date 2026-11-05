@@ -31,8 +31,12 @@ waiting requests and tracked time around the review date, and again for every la
 `test_verification_seed_carries_the_ai_review_cases` (`backend/tests/integration/test_seeders.py`) runs cases 2
 and 3 against a freshly seeded verification location; change it together with them.
 
+`mng prod_seed_db --location verification` deletes and recreates the location, and with it every AI connection to
+it: our own ChatGPT connection has to sign in again, and a reviewer's ends in the middle of a review. Reseed only
+while no review is open at Apple, Google, Anthropic or OpenAI.
+
 ## Demo recording
 
 A screen recording in ChatGPT with the review account that runs the five positive and three negative cases of
-`plugin.json`. The link must be reachable for the reviewers; it goes into `review.demo_recording_url` of
-`plugin.json` or into the portal.
+`plugin.json`, at <https://youtu.be/DyvntJsEEHA> (unlisted on the Gastro Cockpit channel), which
+`review.demo_recording_url` of `plugin.json` carries into the portal.

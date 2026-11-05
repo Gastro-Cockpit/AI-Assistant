@@ -69,10 +69,10 @@
 							"expected_behavior": "Lists the open vacation, time-off and time-correction requests with who asked and for when. Nothing is decided."
 						},
 						{
-							"description": "Labor cost against the target",
-							"prompt": "How does labor cost compare to the target this month?",
+							"description": "Labor cost of this week against the target",
+							"prompt": "How does labor cost compare to the target this week?",
 							"tools_triggered": "get_cost_forecast",
-							"expected_behavior": "Gives the labor cost of the month so far and the forecast against the target, as totals. No wage of any single person is shown."
+							"expected_behavior": "Gives the labor cost of this week so far and the forecast for the week against the target, as totals. No wage of any single person is shown."
 						}
 					],
 					"negative": [
@@ -93,6 +93,7 @@
 						}
 					]
 				},
+				"demo_recording_url": "https://youtu.be/DyvntJsEEHA",
 				"commerce": false,
 				"commerce_description": "The plugin sells nothing and moves no money."
 			},
