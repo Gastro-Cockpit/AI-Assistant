@@ -3,7 +3,11 @@
 	"name": "gastro-cockpit",
 	"version": "1.0.0",
 	"description": "Run your restaurant's staff from the chat: the daily briefing, the weekly schedule, sick reports and the month-end check in Gastro Cockpit, the shift planning and time tracking app for restaurants in Germany.",
-	"author": { "name": "Gastro Cockpit GmbH", "email": "support@gastro-cockpit.de", "url": "https://gastro-cockpit.de" },
+	"author": {
+		"name": "Gastro Cockpit GmbH",
+		"email": "support@gastro-cockpit.de",
+		"url": "https://gastro-cockpit.de"
+	},
 	"homepage": "https://gastro-cockpit.de",
 	"repository": "https://github.com/Gastro-Cockpit/AI-Assistant",
 	"license": "EUPL-1.2",
@@ -47,16 +51,16 @@
 							"expected_behavior": "Says who works today, which shifts are still open, who is absent (without the reason), which requests are waiting and the labor cost. Nothing is changed."
 						},
 						{
-							"description": "Find a replacement for a shift",
-							"prompt": "Who can cover tomorrow's evening shift?",
-							"tools_triggered": "get_day_overview, suggest_staff",
-							"expected_behavior": "Lists suitable staff for the shift with a short reason for each. Nobody is assigned until the user says yes."
+							"description": "Find staff for an extra shift",
+							"prompt": "Who can work tomorrow from 5 pm to 11 pm?",
+							"tools_triggered": "suggest_staff",
+							"expected_behavior": "Lists suitable staff for that time with a short reason for each. Nobody is assigned."
 						},
 						{
-							"description": "Plan the open shifts of a week",
+							"description": "Plan the open shifts of next week",
 							"prompt": "Plan next week's open shifts.",
-							"tools_triggered": "plan_week",
-							"expected_behavior": "Proposes who works which open shift and names what stays open, then asks once. Only after a yes are the shifts assigned."
+							"tools_triggered": "prepare_week, plan_week",
+							"expected_behavior": "Next week has no shifts yet, so it offers to copy this week's shifts first. After a yes it copies them, proposes who works which shift and names what stays open, then asks again before it assigns anyone."
 						},
 						{
 							"description": "List the waiting requests",

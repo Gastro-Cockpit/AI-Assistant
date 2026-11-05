@@ -51,11 +51,11 @@ website and for reference.
 The portal takes up to three and shows them to the reviewers only, not in the listing. The prompts are the first
 three review cases of the ChatGPT listing (`plugin.json`), so both reviews test the same data.
 
-| #   | Use case                             | Example prompt                          |
-| --- | ------------------------------------ | --------------------------------------- |
-| 1   | Daily briefing of a location         | What's going on at my restaurant today? |
-| 2   | Plan and publish the weekly schedule | Plan next week's open shifts.           |
-| 3   | Cover a shift with a replacement     | Who can cover tomorrow's evening shift? |
+| #   | Use case                             | Example prompt                            |
+| --- | ------------------------------------ | ----------------------------------------- |
+| 1   | Daily briefing of a location         | What's going on at my restaurant today?   |
+| 2   | Plan and publish the weekly schedule | Plan next week's open shifts.             |
+| 3   | Find staff for an extra shift        | Who can work tomorrow from 5 pm to 11 pm? |
 
 **Prerequisites:**
 
@@ -91,7 +91,7 @@ The credentials go into the portal only, never into this repository.
 2. On the Gastro Cockpit sign-in page choose "Mit Passwort anmelden" and sign in with the review account.
 3. Tick the location "Gastro Cockpit Verification" and allow. It holds realistic demo data and no real staff; the
    review account is a manager there whom the owner allowed to use the assistant.
-4. Try: "What's going on at my restaurant today?", "Who can cover tomorrow's evening shift?", "Plan next week's
+4. Try: "What's going on at my restaurant today?", "Who can work tomorrow from 5 pm to 11 pm?", "Plan next week's
    open shifts." (Claude shows a proposal and asks before it writes), "Which requests are waiting for me?", "How
    does labor cost compare to the target this month?".
 

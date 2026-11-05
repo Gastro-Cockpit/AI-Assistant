@@ -27,7 +27,9 @@ without an email code, so the instructions use the password.
    expected results of the review cases hold. The location holds demo data and no real staff.
 
 The review cases speak of today, tomorrow, next week and this month, so the location needs shifts, open seats,
-waiting requests and tracked time around the review date, and again for every later review.
+waiting requests and tracked time around the review date, and again for every later review. The app repository's
+`test_verification_seed_carries_the_ai_review_cases` (`backend/tests/integration/test_seeders.py`) runs cases 2
+and 3 against a freshly seeded verification location; change it together with them.
 
 ## Demo recording
 
