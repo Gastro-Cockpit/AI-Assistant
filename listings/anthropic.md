@@ -97,6 +97,34 @@ The credentials go into the portal only, never into this repository.
 
 We confirm in the portal that every tool was run through Claude as a custom connector.
 
+## Plugin bundle
+
+A second submission from the same organization ("Plugin bundle"): this repository, branch `main`, the plugin at its
+root. The directory reads name, description and the listing links from `.claude-plugin/plugin.json` and lists the
+plugin on Claude Code, Cowork and the Claude apps.
+
+**Data handling:**
+
+| Question                                       | Answer           | Why                                                                                                     |
+| ---------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------- |
+| Reads or stores personal data                  | Reads and stores | The connector reads staff names, shifts, hours, absences and requests and writes what the user confirms |
+| A skill sends data to another service          | No               | The skills call only the connector's tools                                                              |
+| How long data received from Claude is retained | Longer           | See below                                                                                               |
+| Intended for users under 18                    | No               | Only owners and the managers they allow can connect                                                     |
+
+> Each tool call writes one audit row (ids, an HMAC of the arguments, the outcome; never the content), kept for 12
+> months. Changes the user confirms in the chat, such as assigned shifts or decided requests, are stored in Gastro
+> Cockpit like any change made in the app and follow its retention, including the statutory retention of
+> working-time records. Details: https://gastro-cockpit.de/datenschutz-app/ (sections 13 and V).
+
+Validation passes with warnings and policy holds that all come from `.github/workflows/publish-mcp.yml`: it
+downloads `mcp-publisher` and reads the registry secret, in GitHub Actions only, never on a user's machine. If a
+reviewer objects, the plugin moves into a subfolder, which needs a new submission.
+
+Submitted on 2026-11-05 with auto-publish off and new versions by scheduled check only (about every 6 hours): `main`
+also carries listing texts and the OpenAI manifest, so every version is published by hand. Tracking a release tag
+instead would make auto-publish safe.
+
 ---
 
 ## Deutsch
