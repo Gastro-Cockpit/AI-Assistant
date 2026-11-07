@@ -1,4 +1,4 @@
-# Checks the format of every file and validates the plugin.
+# Checks the format of every file, validates the plugin and checks that every manifest carries one version.
 name: Lint
 
 on:
@@ -26,7 +26,13 @@ jobs:
         with:
           node-version: 24.22.1
 
-      - uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4
+      # Pinned: another oxfmt version rewrites files that this check then rejects.
+      - run: pnpm dlx oxfmt@0.74.0 --check .
 
       # Claude Code installs its native binary in a postinstall script, which pnpm runs only when allowed.
-      - run: just claude="pnpm dlx --allow-build=@anthropic-ai/claude-code @anthropic-ai/claude-code@2.1.309" lint
+      - run: pnpm dlx --allow-build=@anthropic-ai/claude-code @anthropic-ai/claude-code@2.1.309 plugin validate .
+
+      - name: Check that every manifest carries one version
+        run: |
+          test "$(jq -r .version .claude-plugin/plugin.json)" = "$(jq -r .version plugin.json)"
+          test "$(jq -r .version server.json)" = "$(jq -r .version plugin.json)"

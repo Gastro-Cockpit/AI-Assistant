@@ -7,7 +7,8 @@ holds only what the ZIP cannot carry.
 
 ## Submit
 
-1. `just zip` builds `dist/gastro-cockpit-<version>.zip` from the last commit.
+1. Build `dist/gastro-cockpit-<version>.zip` from the last commit with the `git archive` command in
+   [`.claude/CLAUDE.md`](../.claude/CLAUDE.md) (Checks).
 2. At <https://platform.openai.com/plugins> choose "Upload new or existing plugin", the verified developer identity
    Gastro Cockpit GmbH, and the ZIP. The project must have global data residency: projects with EU data residency
    cannot submit plugins with an MCP server.

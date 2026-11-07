@@ -117,9 +117,13 @@ plugin on Claude Code, Cowork and the Claude apps.
 > Cockpit like any change made in the app and follow its retention, including the statutory retention of
 > working-time records. Details: https://gastro-cockpit.de/datenschutz-app/ (sections 13 and V).
 
-Validation passes with warnings and policy holds that all come from `.github/workflows/publish-mcp.yml`: it
-downloads `mcp-publisher` and reads the registry secret, in GitHub Actions only, never on a user's machine. If a
-reviewer objects, the plugin moves into a subfolder, which needs a new submission.
+The scan of 2026-11-07 refused the version because of the `justfile` (`LOCAL_CODE_FILE_TYPE`): from an
+organization that Anthropic has not verified, the directory takes only Markdown, text, JSON, YAML and images. Its
+commands moved into `lint.yml` and `.claude/CLAUDE.md`. The remaining findings hold the plugin for a manual
+review and all come from `.github/workflows/publish-mcp.yml`: it downloads `mcp-publisher` and reads the registry
+secret, in GitHub Actions only, never on a user's machine. If a reviewer objects, the plugin moves into a
+subfolder, which needs a new submission. The root `plugin.json` (Agent Plugins format, for ChatGPT) is noted and
+ignored by Claude.
 
 Submitted on 2026-11-05 with auto-publish off and new versions by scheduled check only (about every 6 hours): `main`
 also carries listing texts and the OpenAI manifest, so every version is published by hand. Tracking a release tag
