@@ -100,17 +100,21 @@ We confirm in the portal that every tool was run through Claude as a custom conn
 ## Plugin bundle
 
 A second submission from the same organization ("Plugin bundle"): this repository, branch `main`, plugin path
-`plugin`. The directory reads name, description and the listing links from `plugin/.claude-plugin/plugin.json` and
-lists the plugin on Claude Code, Cowork and the Claude apps.
+`plugin`. The directory reads name, description and the listing links from `plugin/.claude-plugin/plugin.json`, the
+listing text from `plugin/README.md`, and lists the plugin on Claude Code, Cowork and the Claude apps. The portal
+has no text fields for the listing: to change it, change these files and publish a new version.
 
-**Data handling:**
+Validation warns `UNKNOWN_KEY` for `documentationUrl`, `supportUrl`, `privacyPolicyUrl` and `termsOfServiceUrl`:
+Claude Code ignores them, and the directory reads them for the listing. No action needed.
 
-| Question                                       | Answer           | Why                                                                                                     |
-| ---------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------- |
-| Reads or stores personal data                  | Reads and stores | The connector reads staff names, shifts, hours, absences and requests and writes what the user confirms |
-| A skill sends data to another service          | No               | The skills call only the connector's tools                                                              |
-| How long data received from Claude is retained | Longer           | See below                                                                                               |
-| Intended for users under 18                    | No               | Only owners and the managers they allow can connect                                                     |
+**Data handling** (step 4 of 6):
+
+| Question                                                                  | Answer           | Why                                                                                                     |
+| ------------------------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------- |
+| Does the plugin read or store personal data (names, emails, addresses)?   | Reads and stores | The connector reads staff names, shifts, hours, absences and requests and writes what the user confirms |
+| Does any skill send data to a service other than the declared connectors? | No               | The skills call only the connector's tools                                                              |
+| How long does your service retain data received from Claude?              | Longer           | See below                                                                                               |
+| Is the plugin intended for users under 18?                                | No               | Only owners and the managers they allow can connect                                                     |
 
 > Each tool call writes one audit row (ids, an HMAC of the arguments, the outcome; never the content), kept for 12
 > months. Changes the user confirms in the chat, such as assigned shifts or decided requests, are stored in Gastro
@@ -122,9 +126,10 @@ Anthropic has not verified, it refuses a version with any file other than Markdo
 and any `CLAUDE.md`, and it holds a version for a reviewer when a file downloads code or reads a secret. With the
 plugin at the repository root, the first submission (2026-11-05) was refused for the `justfile`, held for
 `.github/workflows/publish-mcp.yml`, and refused on 2026-11-26 for `.claude/CLAUDE.md`. The `plugin.json` beside
-`skills/` (Agent Plugins format, for ChatGPT) is noted and ignored by Claude.
+`skills/` (Agent Plugins format, for ChatGPT) is noted and ignored by Claude. The first submission was withdrawn,
+and the plugin was submitted again from `plugin` on 2026-11-26.
 
-Submit with auto-publish off and new versions by scheduled check only (about every 6 hours): `plugin/` also carries
+Auto-publish is off and new versions arrive by scheduled check only (about every 6 hours): `plugin/` also carries
 the OpenAI manifest, so every version is published by hand. Tracking a release tag instead would make auto-publish
 safe.
 
