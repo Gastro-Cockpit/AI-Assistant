@@ -3,11 +3,11 @@
 	"name": "de.gastro-cockpit/mcp",
 	"title": "Gastro Cockpit",
 	"description": "Plan shifts, cover sick days and check payroll for your restaurant, straight from the chat.",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"websiteUrl": "https://gastro-cockpit.de",
 	"icons": [
 		{
-			"src": "https://raw.githubusercontent.com/Gastro-Cockpit/AI-Assistant/main/.claude-plugin/icon.png",
+			"src": "https://raw.githubusercontent.com/Gastro-Cockpit/AI-Assistant/main/plugin/.claude-plugin/icon.png",
 			"mimeType": "image/png",
 			"sizes": ["1024x1024"]
 		}

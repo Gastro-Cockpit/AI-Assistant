@@ -19,7 +19,7 @@ website and for reference.
 | Documentation URL  | <https://gastro-cockpit.de/hilfe/standort-und-einstellungen/ki-assistent-verbinden/> |
 | Privacy policy URL | <https://gastro-cockpit.de/datenschutz-app/> (section 13)                            |
 | Support contact    | support@gastro-cockpit.de                                                            |
-| Icon               | `Logo-CI/Logo_primary/Logo_svg/logo_icon_only.svg`                                   |
+| Icon               | `Logo-CI/Logo_primary/Logo_svg/logo-mark-primary-dark.svg`                           |
 
 **One-liner (≤ 200):**
 
@@ -99,9 +99,9 @@ We confirm in the portal that every tool was run through Claude as a custom conn
 
 ## Plugin bundle
 
-A second submission from the same organization ("Plugin bundle"): this repository, branch `main`, the plugin at its
-root. The directory reads name, description and the listing links from `.claude-plugin/plugin.json` and lists the
-plugin on Claude Code, Cowork and the Claude apps.
+A second submission from the same organization ("Plugin bundle"): this repository, branch `main`, plugin path
+`plugin`. The directory reads name, description and the listing links from `plugin/.claude-plugin/plugin.json` and
+lists the plugin on Claude Code, Cowork and the Claude apps.
 
 **Data handling:**
 
@@ -117,19 +117,16 @@ plugin on Claude Code, Cowork and the Claude apps.
 > Cockpit like any change made in the app and follow its retention, including the statutory retention of
 > working-time records. Details: https://gastro-cockpit.de/datenschutz-app/ (sections 13 and V).
 
-The scan of 2026-11-07 refused the version because of the `justfile` (`LOCAL_CODE_FILE_TYPE`): from an
-organization that Anthropic has not verified, the directory takes only Markdown, text, JSON, YAML and images. Its
-commands moved into `lint.yml` and `.claude/CLAUDE.md`. The remaining findings hold the plugin for a manual
-review and all come from `.github/workflows/publish-mcp.yml`: it downloads `mcp-publisher` and reads the registry
-secret, in GitHub Actions only, never on a user's machine. If a reviewer objects, the plugin moves into a
-subfolder, which needs a new submission. The root `plugin.json` (Agent Plugins format, for ChatGPT) is noted and
-ignored by Claude.
+The plugin sits in a subfolder because the directory then scans only that folder. From an organization that
+Anthropic has not verified, it refuses a version with any file other than Markdown, text, JSON, YAML and images,
+and any `CLAUDE.md`, and it holds a version for a reviewer when a file downloads code or reads a secret. With the
+plugin at the repository root, the first submission (2026-11-05) was refused for the `justfile`, held for
+`.github/workflows/publish-mcp.yml`, and refused on 2026-11-26 for `.claude/CLAUDE.md`. The `plugin.json` beside
+`skills/` (Agent Plugins format, for ChatGPT) is noted and ignored by Claude.
 
-Submitted on 2026-11-05 with auto-publish off and new versions by scheduled check only (about every 6 hours): `main`
-also carries listing texts and the OpenAI manifest, so every version is published by hand. Tracking a release tag
-instead would make auto-publish safe.
-
----
+Submit with auto-publish off and new versions by scheduled check only (about every 6 hours): `plugin/` also carries
+the OpenAI manifest, so every version is published by hand. Tracking a release tag instead would make auto-publish
+safe.
 
 ## Deutsch
 

@@ -30,9 +30,9 @@ jobs:
       - run: pnpm dlx oxfmt@0.74.0 --check .
 
       # Claude Code installs its native binary in a postinstall script, which pnpm runs only when allowed.
-      - run: pnpm dlx --allow-build=@anthropic-ai/claude-code @anthropic-ai/claude-code@2.1.309 plugin validate .
+      - run: pnpm dlx --allow-build=@anthropic-ai/claude-code @anthropic-ai/claude-code@2.1.309 plugin validate plugin
 
       - name: Check that every manifest carries one version
         run: |
-          test "$(jq -r .version .claude-plugin/plugin.json)" = "$(jq -r .version plugin.json)"
-          test "$(jq -r .version server.json)" = "$(jq -r .version plugin.json)"
+          test "$(jq -r .version plugin/.claude-plugin/plugin.json)" = "$(jq -r .version plugin/plugin.json)"
+          test "$(jq -r .version server.json)" = "$(jq -r .version plugin/plugin.json)"

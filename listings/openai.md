@@ -1,7 +1,7 @@
 # ChatGPT Plugins Directory
 
 The listing, the review cases, the countries and the German translation live in `extensions.com.openai` of the root
-[`plugin.json`](../plugin.json); the portal imports them from the ZIP and shows them read-only. The texts follow
+[`plugin.json`](../plugin/plugin.json); the portal imports them from the ZIP and shows them read-only. The texts follow
 [anthropic.md](anthropic.md) with "Claude" replaced by "ChatGPT", plus a paragraph on the limitations. This file
 holds only what the ZIP cannot carry.
 
