@@ -15,6 +15,7 @@ there) and runs at `https://mcp.gastro-cockpit.de/mcp`. Nothing here is server c
 | `plugin/plugin.json`, `plugin/mcp.json` | The same plugin and server for ChatGPT (Agent Plugins format), with the listing, review cases, countries and German translation under `extensions.com.openai` |
 | `plugin/skills/<name>/SKILL.md`         | One folder per skill; the folder name equals the skill's `name`                                                                                               |
 | `plugin/README.md`, `plugin/LICENSE`    | Both directories require them; the README is the listing text of the Claude plugin                                                                            |
+| `README.md`                             | The repository README on GitHub; it points to `plugin/README.md`, and its License section repeats the one there; change both                                  |
 | `LICENSE`                               | A copy of `plugin/LICENSE` for the rest of the repository, at the root where GitHub shows it; change both                                                     |
 | `listings/`                             | What we enter in the Claude and ChatGPT portals, English with a German version                                                                                |
 | `server.json`                           | The entry `de.gastro-cockpit/mcp` in the official MCP Registry                                                                                                |
